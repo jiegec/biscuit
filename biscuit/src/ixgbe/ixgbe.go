@@ -658,6 +658,9 @@ func (x *ixgbe_t) init(t pci.Pcitag_t) {
 	x.mtu = 1500
 
 	v := pci.Pci_read(t, 0x4, 2)
+	// try to enable bus mastering
+	pci.Pci_write(t, 0x4, v | 0x40f)
+	v = pci.Pci_read(t, 0x4, 2)
 	memen := 1 << 1
 	if v&memen == 0 {
 		panic("memory access disabled")

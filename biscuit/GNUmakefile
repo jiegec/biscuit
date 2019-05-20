@@ -232,7 +232,7 @@ old_qemu-gdb: d.img
 	$(QEMU) $(QOPTS) -S -s -hda d.img
 
 gqemu: go.img
-	$(QEMU) $(QOPTS) -nographic
+	sudo $(QEMU) $(QOPTS) -nographic -device vfio-pci,host=0000:03:00.1
 
 gqemux: go.img
 	$(QEMU) $(QOPTS) -serial stdio
